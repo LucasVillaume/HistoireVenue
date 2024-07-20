@@ -1,6 +1,8 @@
+//Home page component
+
 import React, {useEffect, useState} from 'react'
 
-function App() {
+function Home() {
 
   //check router with React
 
@@ -28,4 +30,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
