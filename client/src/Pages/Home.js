@@ -4,8 +4,6 @@ import React, {useEffect, useState} from 'react'
 
 function Home() {
 
-  //check router with React
-
   const [backendData, setBackendData] = useState([{}])
 
   useEffect(() => {
