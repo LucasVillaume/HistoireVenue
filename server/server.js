@@ -7,7 +7,27 @@ app.get('/api', (req, res) => {
 
 app.get('/questions', (req, res) => {
     //toy example
-    res.json({"Theme" : "Theme1", "questions": ["question11", "question12", "question13", "question14"], "answers": ["answer11", "answer12", "answer13", "answer14"]});
+    let example = {
+        "Theme" : "Theme1",
+        "obj" : [
+            {
+                "question" : "question1",
+                "answer" : "answer1",
+                "points" : 400
+            },
+            {
+                "question" : "question2",
+                "answer" : "answer2",
+                "points" : 200
+            },
+            {
+                "question" : "question3",
+                "answer" : "answer3",
+                "points" : 100
+            }
+        ]
+    }
+    res.json([example, example]);
 });
 
 app.listen(5000, () => {
