@@ -1,7 +1,8 @@
 // Main page of the game part of the app
 
-import { useEffect, useState, Children } from "react";
+import { useEffect, useState } from "react";
 import Spacer from "../Components/Spacer";
+import "../styles/game.css";
 
 //Component for the question card
 function Card({question, answer, points}) {
@@ -22,19 +23,17 @@ function Card({question, answer, points}) {
     };
     
     const move = () => { setMoved(!moved) };
-
-
     
     if (!moved) {
         return (
-            <div>
+            <div class="card" onMouseDown={move}>
                 <p>{points}</p>
                 <button onClick={move}>Flip</button>
             </div>
         );
     } else {
         return (
-            <div>
+            <div class="card-flipped">
                 <p>{question}</p>
                 <p>{text}</p>
                 {!revealed && <button onClick={reveal}>Reveal</button>}
@@ -46,7 +45,7 @@ function Card({question, answer, points}) {
 //Component for the theme
 function Theme({theme, children}) {
     return (
-        <div>
+        <div class="theme">
             <h1>{theme}</h1>
             {children}
         </div>
@@ -68,7 +67,9 @@ function Game() {
     }, []);
 
     return (
-        <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+        <>
+        <h1 class="title">Game</h1>
+        <div class="container">
             <Spacer spacing={50}>
                 {themes.map((theme, i) => (
                     <Theme key={i} theme={theme.Theme}>
@@ -79,6 +80,7 @@ function Game() {
                 ))}
             </Spacer>
         </div>
+        </>
     );
 }
 
