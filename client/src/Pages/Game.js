@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Spacer from "../Components/Spacer";
+import Player from "../Components/Player";
 import "../styles/game.css";
 
 //Component for the question card
@@ -42,6 +43,7 @@ function Card({question, answer, points}) {
     }
 }
 
+
 //Component for the theme
 function Theme({theme, children}) {
     return (
@@ -53,11 +55,21 @@ function Theme({theme, children}) {
 }
 
 
-
 function Game() {
 
+    //state to track the players
+    const [players, setPlayer] = useState([]);
     //state for the questions
     const [themes, setThemes] = useState([]);
+
+    // function to add a player
+    const addPlayer = () => {
+        if (players.length === 5) {
+            alert('Max number of players reached');
+            return;
+        }
+        setPlayer([...players, <Player key={players.length} />]);
+    };
 
     useEffect (() => {
         document.title = 'Let\'s play !';
@@ -78,6 +90,14 @@ function Game() {
                         ))}
                     </Theme>
                 ))}
+            </Spacer>
+        </div>
+        <br/>
+        <br/>
+        <button onClick={addPlayer}>New challenger</button>
+        <div class="container">
+            <Spacer spacing={150}>
+                {players}
             </Spacer>
         </div>
         </>

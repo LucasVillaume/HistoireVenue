@@ -2,6 +2,10 @@
     text-align: center;
 }
 
+body {
+    background-color: #AAAAAA;
+}
+
 .container {
     display: flex;
     align-items: center;
