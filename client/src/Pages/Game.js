@@ -1,6 +1,7 @@
 // Main page of the game part of the app
 
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import Spacer from "../Components/Spacer";
 import Player from "../Components/Player";
 import "../styles/game.css";
@@ -55,12 +56,18 @@ function Theme({theme, children}) {
 }
 
 
+
+
 function Game() {
 
     //state to track the players
     const [players, setPlayer] = useState([]);
     //state for the questions
     const [themes, setThemes] = useState([]);
+
+    //Read properties from the location object (if setup page was visited)
+    const location = useLocation();
+    const themesList = location.state || {"themes":["","",""]};
 
     // function to add a player
     const addPlayer = () => {
@@ -73,9 +80,17 @@ function Game() {
 
     useEffect (() => {
         document.title = 'Let\'s play !';
-        fetch('/questions')
-            .then(response => response.json())
-            .then(data => setThemes(data));
+        
+        fetch('/game', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify( themesList )
+        }).then(response => response.json())
+            .then(data => {
+                setThemes(data);
+            });
     }, []);
 
     return (

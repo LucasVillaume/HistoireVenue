@@ -4,8 +4,13 @@ import "../styles/player.css";
 
 export default function Player(){
 
+    const nameGenerator = () => {
+        const names = ['Antoine', 'notAntoine', 'True', 'You', 'Joe Mama'];
+        return names[Math.floor(Math.random() * names.length)];
+    }
+
     const [score, setScore] = useState(0);
-    const [name, setName] = useState('Name');
+    const [name, setName] = useState(nameGenerator());
     //TODO: add a state for the color of the player (click to change) ??
 
     //function to rename the player
