@@ -48,7 +48,7 @@ def extracr_themes(file):
 
 
 def convert_to_json(themes):
-    json = "{ \"themes\":["
+    json = "["
     for theme in themes:
         json += "{ \"name" + "\":\"" + theme.name + "\","
         json += "\"q100\":[" + ",".join([f"{{\"question\":\"{q.question}\",\"answer\":\"{q.answer}\",\"points\":{q.points}}}" for q in theme.q100]) + "],"
@@ -58,7 +58,7 @@ def convert_to_json(themes):
         if theme != themes[-1]:
             json += ","
 
-    return json + "]}"
+    return json + "]"
 
 
 if __name__ == '__main__':
