@@ -9,8 +9,8 @@ import "../styles/game.css";
 //Component for the question card
 function Card({question, answer, points}) {
 
-    //generate random strings from 2 to 6 characters
-    const random_str = Math.random().toString(36).substring(2,7);
+    //generate random strings
+    const random_str = Math.random().toString(36).substring(2,20);
 
     //state for the answer
     const [text, setText] = useState(random_str);
@@ -18,10 +18,22 @@ function Card({question, answer, points}) {
     const [moved, setMoved] = useState(false);
     //state for the button
     const [revealed, setRevealed] = useState(false);
+    let timeoutID = null;
 
-    const reveal = () => { 
+
+    useEffect(() => {
+        if (moved && !revealed){
+            timeoutID = setTimeout(() => {
+                setText(random_str);
+            }, 100);
+        }
+    },[moved, revealed, random_str]); // useEffect will run when moved, revealed or random_str changes
+
+
+    const reveal = () => {
+        clearTimeout(timeoutID);
+        setRevealed(true); 
         setText(answer);
-        setRevealed(true);
     };
     
     const move = () => { setMoved(!moved) };
@@ -43,6 +55,7 @@ function Card({question, answer, points}) {
         );
     }
 }
+
 
 
 //Component for the theme
@@ -88,9 +101,9 @@ function Game() {
             },
             body: JSON.stringify( themesList )
         }).then(response => response.json())
-            .then(data => {
-                setThemes(data);
-            });
+        .then(data => {
+            setThemes(data);
+        });
     }, []);
 
     return (

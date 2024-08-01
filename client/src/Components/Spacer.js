@@ -3,7 +3,7 @@ import React from "react";
 export default function Spacer({children, spacing=50}) {
     return (
         // This div will contain all the children passed to the Spacer component
-        <div style={{display: "flex", flexDirection: "row"}}>
+        <div style={{display: "flex", flexDirection: "row", maxWidth: "80%"}}>
             {React.Children.map(children, (child, index) => { // Iterate over all the children
                 return (
                     // Add a margin to the right of each child except the last one

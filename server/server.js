@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const crypto = require('crypto');
 
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -97,7 +98,7 @@ function craftGame(req, res) {
             themes.splice(themes.indexOf(select), 1);
         }
     });
-    res.json(questions);
+    res.json(fisherYates(questions));
 
 }
 
@@ -106,8 +107,15 @@ function craftGame(req, res) {
 
 
 
-
-
+//Shuffle the questions (avoid the sort() bias)
+function fisherYates(array) {
+    const random = crypto.getRandomValues(new Uint32Array(array.length));
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = random[i] % array.length;
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 
 
