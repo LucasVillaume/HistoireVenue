@@ -1,6 +1,6 @@
 //Component to track player's score
 import {useState} from 'react';
-import "../styles/player.css";
+import "../App.css";
 
 export default function Player(){
 

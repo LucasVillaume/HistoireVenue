@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Spacer from "../Components/Spacer";
 import Player from "../Components/Player";
-import "../styles/game.css";
+import "../App.css";
 
 //Component for the question card
 function Card({question, answer, points}) {
@@ -77,6 +77,8 @@ function Game() {
     const [players, setPlayer] = useState([]);
     //state for the questions
     const [themes, setThemes] = useState([]);
+    //state for the button class
+    const [buttonClass, setClass] = useState("game-button");
 
     //Read properties from the location object (if setup page was visited)
     const location = useLocation();
@@ -86,6 +88,7 @@ function Game() {
     const addPlayer = () => {
         if (players.length === 5) {
             alert('Max number of players reached');
+            setClass("hidden");
             return;
         }
         setPlayer([...players, <Player key={players.length} />]);
@@ -108,26 +111,26 @@ function Game() {
 
     return (
         <>
-        <h1 class="title">Game</h1>
-        <div class="container">
-            <Spacer spacing={50}>
-                {themes.map((theme, i) => (
-                    <Theme key={i} theme={theme.Theme}>
-                        {theme.obj.map((question, j) => (
-                            <Card key={j} question={question.question} answer={question.answer} points={question.points}/>
-                        ))}
-                    </Theme>
-                ))}
-            </Spacer>
-        </div>
-        <br/>
-        <br/>
-        <button onClick={addPlayer}>New challenger</button>
-        <div class="container">
-            <Spacer spacing={150}>
-                {players}
-            </Spacer>
-        </div>
+            <h1 class="game-title">Game</h1>
+            <div class="game-container">
+                <Spacer spacing={50}>
+                    {themes.map((theme, i) => (
+                        <Theme key={i} theme={theme.Theme}>
+                            {theme.obj.map((question, j) => (
+                                <Card key={j} question={question.question} answer={question.answer} points={question.points}/>
+                            ))}
+                        </Theme>
+                    ))}
+                </Spacer>
+            </div>
+            <br/>
+            <br/>
+            <button class={buttonClass} onClick={addPlayer}>New challenger</button>
+            <div class="game-container">
+                <Spacer spacing={150}>
+                    {players}
+                </Spacer>
+            </div>
         </>
     );
 }

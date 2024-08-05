@@ -8,10 +8,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 
-app.get('/api', (req, res) => {
-    res.json({ "users": ["user1", "user2", "user3", "user4"] });
-});
-
 app.get('/questions', (req, res) => {
     //toy example
     let example = {
@@ -116,14 +112,6 @@ function fisherYates(array) {
     }
     return array;
 }
-
-
-
-
-
-
-
-
 
 
 //launch server

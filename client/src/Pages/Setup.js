@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Spacer from "../Components/Spacer";
-import '../styles/setup.css';
+import '../App.css';
 
 
 function Setup() {
@@ -57,11 +56,11 @@ function Setup() {
         <div>
             <h1>Setup</h1>
             <p>Setup a game with different settings</p>
-            <form onSubmit={handleSubmit}>
+            <form class="setup" onSubmit={handleSubmit}>
                 {
                     selectedThemes.map((theme, index) => {
                         return (
-                            <select class="themes" key={index} value={theme} onChange={(event) => {
+                            <select class="select-themes" key={index} value={theme} onChange={(event) => {
                                 const newSelectedThemes = [...selectedThemes];
                                 newSelectedThemes[index] = event.target.value;
                                 setSelectedThemes(newSelectedThemes);
