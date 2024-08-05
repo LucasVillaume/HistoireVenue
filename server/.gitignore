@@ -1,0 +1,4 @@
+# dependencies
+/node_modules
+/questions.csv
+/questions.json
